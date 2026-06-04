@@ -1,3 +1,0 @@
-"DESCRIPTION","DURATION IN MS","NAME","PARENT SUITE","START TIME","STATUS","STOP TIME","SUB SUITE","SUITE","TEST CLASS","TEST METHOD"
-"","10608","checkbox","chromium","Tue Jun 02 12:49:56 IST 2026","failed","Tue Jun 02 12:50:07 IST 2026","","June 01\report.spec.ts","",""
-"","12708","radiobutton","chromium","Tue Jun 02 12:49:43 IST 2026","passed","Tue Jun 02 12:49:55 IST 2026","","June 01\report.spec.ts","",""
