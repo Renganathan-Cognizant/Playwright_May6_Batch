@@ -14,6 +14,5 @@ test('keyboardactions', async({page})=>{
 
     //await page.keyboard.press('')
 
-    page.keyboard.
 
 })

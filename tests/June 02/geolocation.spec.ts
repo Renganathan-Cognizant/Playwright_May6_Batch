@@ -31,7 +31,7 @@ test("without geolocation", async({page})=>{
     await page.waitForTimeout(10000)
 })
 
-test.only('Set geolocation and verify location-based content', async () => {
+test('Set geolocation and verify location-based content', async () => {
   const browser = await chromium.launch();
   const context = await browser.newContext({
     geolocation: { latitude: 48.8566, longitude: 2.3522 }, // Paris, France

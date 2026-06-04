@@ -102,7 +102,7 @@ test.describe('🔵 TEST FIXTURE — loginPage (re-runs per test)', () => {
 // same already-logged-in page.
 // The browser closes only after the last test in the worker.
 // ===========================================================
-test.describe.only('🟢 WORKER FIXTURE — loggedInPage (shared across all tests)', () => {
+test.describe('🟢 WORKER FIXTURE — loggedInPage (shared across all tests)', () => {
 
     // ── TC04 ────────────────────────────────────────────────
     test('TC04 — Verify Dashboard widgets are present (shared login)', async ({ loggedInPage }) => {

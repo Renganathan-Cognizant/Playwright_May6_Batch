@@ -22,7 +22,7 @@ test('set viewport method 1',async()=>{
 })
 
 
-test.only('viewport method 2', async () => {
+test('viewport method 2', async () => {
   const browser = await chromium.launch({
     headless: false,
     //args: ['--start-maximized'],
