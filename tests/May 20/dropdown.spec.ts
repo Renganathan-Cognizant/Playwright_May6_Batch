@@ -26,7 +26,7 @@ test("multi dropdown", async({page})=>{
 })
 
 
-//hidden dropdown - pending
+//hidden dropdown - completed
 
 
 

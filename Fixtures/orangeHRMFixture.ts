@@ -49,7 +49,7 @@ export const test = baseTest.extend<TestFixtures, WorkerFixtures>({
         // ── SETUP (before use) ────────────────────────────────
         console.log('\n[TEST FIXTURE] Setup: launching browser for this test');
 
-        const browser: Browser  = await chromium.launch({ headless: false, slowMo: 40 });
+        const browser: Browser  = await chromium.launch({ headless: true, slowMo: 40 });
         const context: BrowserContext = await browser.newContext({ viewport: { width: 1280, height: 720 } });
         const page: Page        = await context.newPage();
 
@@ -77,7 +77,7 @@ export const test = baseTest.extend<TestFixtures, WorkerFixtures>({
             // ── SETUP (once per worker) ───────────────────────
             console.log('\n[WORKER FIXTURE] ▶ Setup: launching browser & logging in ONCE for this worker');
 
-            const browser: Browser  = await chromium.launch({ headless: false, slowMo: 40 });
+            const browser: Browser  = await chromium.launch({ headless: true, slowMo: 40 });
             const context: BrowserContext = await browser.newContext({ viewport: { width: 1280, height: 720 } });
             const page: Page        = await context.newPage();
 

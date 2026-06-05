@@ -24,10 +24,11 @@ export default defineConfig({
   /* Retry on CI only */
   retries: process.env.CI ? 2 : 0,
   /* Opt out of parallel tests on CI. */
-  workers: process.env.CI ? 1 : 1, //controls file level parallelism
+  workers: process.env.CI ? 1 : undefined, //controls file level parallelism
   /* Reporter to use. See https://playwright.dev/docs/test-reporters */
   //reporter: [['html', { open: 'always' }]],
-  reporter:[['json',{outputFile:'myjson.json'}]],
+  //reporter:[['json',{outputFile:'myjson.json'}]],
+  reporter:'blob',
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
   use: {
     /* Base URL to use in actions like `await page.goto('/')`. */

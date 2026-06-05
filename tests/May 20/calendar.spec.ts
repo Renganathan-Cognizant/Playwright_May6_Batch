@@ -234,3 +234,77 @@ test('Date Range Picker - Start date today & End date 5 days from today', async 
 
     await page.waitForTimeout(3000);
 });
+
+// ─────────────────────────────────────────────────────────────────────────────
+// Date Picker 3: Select a Date Range  (format: dd-mm-yyyy)
+// ─────────────────────────────────────────────────────────────────────────────
+test('Date Picker 3 - Select a Date Range', async ({ page }) => {
+
+    // 📅 Define Start Date and End Date (change these values as needed)
+    const startMoment = moment('10-08-2026', 'DD-MM-YYYY');  // 10 August 2026
+    const endMoment   = moment('25-08-2026', 'DD-MM-YYYY');  // 25 August 2026
+
+    // Extract individual parts for navigation
+    const startDay   = startMoment.format('D');           // "10"
+    const endDay     = endMoment.format('D');             // "25"
+    const startMonth = startMoment.format('MMMM YYYY');   // "August 2026"
+    const endMonth   = endMoment.format('MMMM YYYY');     // "August 2026"
+
+    console.log(`Start Date : ${startMoment.format('DD-MM-YYYY')}`);
+    console.log(`End Date   : ${endMoment.format('DD-MM-YYYY')}`);
+
+    await page.goto("https://testautomationpractice.blogspot.com/");
+
+    // Scroll Date Picker 3 into view
+    await page.locator('#start-date').scrollIntoViewIfNeeded();
+    await page.waitForTimeout(500);
+
+    // ── Helper: open a date input, navigate to the target month, click the day ─
+    async function pickDate(inputId: string, targetMonth: string, targetDay: string) {
+
+        await page.click(inputId);
+
+        // Calendar header that shows current "Month YYYY"
+        const calHeader = page.locator('.ui-datepicker-title');
+        const prevBtn   = page.locator('[title="Prev"]');
+        const nextBtn   = page.locator('[title="Next"]');
+
+        // Navigate to the correct month ──────────────────────────────────────
+        while (true) {
+            const headerText    = await calHeader.textContent();
+            const currentMoment = moment(headerText?.trim(), 'MMMM YYYY');
+            const targetMoment  = moment(targetMonth, 'MMMM YYYY');
+
+            if (currentMoment.isSame(targetMoment, 'month')) break;
+
+            if (targetMoment.isAfter(currentMoment, 'month')) {
+                await nextBtn.click();
+            } else {
+                await prevBtn.click();
+            }
+            await page.waitForTimeout(300);
+        }
+
+        // Click the matching day cell ─────────────────────────────────────────
+        await page.locator(`tr > td > a:text-is('${targetDay}')`).click();
+        await page.waitForTimeout(500);
+    }
+
+    // ── Select Start Date ─────────────────────────────────────────────────────
+    await pickDate('#start-date', startMonth, startDay);
+
+    // ── Select End Date ───────────────────────────────────────────────────────
+    await pickDate('#end-date', endMonth, endDay);
+
+    // ── Read back the values and log them ─────────────────────────────────────
+    const startValue = await page.inputValue('#start-date');
+    const endValue   = await page.inputValue('#end-date');
+
+    console.log(`Start date field : ${startValue}`);  // expected: 10-08-2026
+    console.log(`End date field   : ${endValue}`);    // expected: 25-08-2026
+
+    // ── Click the Submit button for Date Picker 3 ─────────────────────────────
+    await page.locator('.date-picker-box button').click();
+
+    await page.waitForTimeout(2000);
+});
